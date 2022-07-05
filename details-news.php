@@ -31,6 +31,34 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') :
   $theNews['response'] = "Suppression de la news avec l'id {$_GET['id_news']}";
 endif;
 
+// ton code est bon mais c'est pas la bonne route, on a répliqué dans all-news
+/*
+if($_SERVER['REQUEST_METHOD'] == 'POST') :
+  $json file_get_contents('php://input');
+  $object json_decode($json);
+  echo $sql = sprintf("INSERT INTO `news` SET `titre`='%s', `contenu`='%s'",
+    $object->titre,
+    $object->contenu
+  );
+  $connect->query($sql);
+  echo $connect->error;
+  $theNews['new_id'] = $connect->insert_id;
+  $theNews['response'] = "ajout d'une news avec l'id " .$connect->insert_id;
+endif;*/
+
+if($_SERVER['REQUEST_METHOD'] == 'PUT') :
+  $json = file_get_contents('php://input');
+  $object = json_decode($json);
+  $sql = sprintf("UPDATE `news` SET `titre`='%s', `contenu`='%s' WHERE id_news=%d",
+    strip_tags(addslashes($object->titre)),
+    strip_tags(addslashes($object->contenu)),
+    $_GET['id_news']
+  );
+  $connect->query($sql);
+  echo $connect->error;
+  $theNews['response'] = "edit de la news avec l'id " . $_GET['id_news'];
+endif;
+
 // myPrint_r($theNews); on masque car sinon ça va générer une erreur
 //$nb_rows = $result->num_rows;
 

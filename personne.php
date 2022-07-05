@@ -32,12 +32,32 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') : // gestion du delete
 endif;
 
 if($_SERVER['REQUEST_METHOD'] == "POST") :
+  $json = file_get_contents('php://input'); // on récupère le json dans l'ent-ête http
+  $object = json_decode($json); // on le decode, ça génère un objet PHP
   $sql = sprintf("INSERT INTO `personnes`SET `nom`='%s', `prenom`='%s'",
-  $_POST['nom'], $_POST['prenom']);
+    $object->nom, // lire les propriétés de l'objet
+    $object->prenom
+    //$_POST['nom'], //ancienne methode, mtn on balance des objets json plutôt que de chipoter avec un formulaire
+    //$_POST['prenom']
+  );
   $connect->query($sql);
   echo $connect->error;
   $allPeople['new_id'] = $connect->insert_id; // quand on insert une entrée, on ne connait pas l'ID pusque c'est la DB qui va le créer, donc on met l'insert_id ici
   $allPeople['response'] = "Ajout d'une personne avec l'id " . $connect->insert_id; // et du coup on le récup ici
+  
+endif;
+
+if($_SERVER['REQUEST_METHOD'] == "PUT") :
+  $json = file_get_contents('php://input'); // on récupère le json dans l'ent-ête http
+  $object = json_decode($json); // on le decode, ça génère un objet PHP
+  $sql = sprintf("UPDATE `personnes`SET `nom`='%s', `prenom`='%s' WHERE id_personnes=%d",
+    $object->nom, 
+    $object->prenom,
+    $_GET['id_personnes']
+  );
+  $connect->query($sql);
+  echo $connect->error;
+  $allPeople['response'] = "Edit d'une personne avec l'id " . $_GET['id_personnes']; // et du coup on le récup ici
   
 endif;
 
