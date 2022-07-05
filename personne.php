@@ -31,6 +31,16 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') : // gestion du delete
   $allPeople['response'] = "Suppression du personnage avec l'id " . $_GET['id_personnes'];
 endif;
 
+if($_SERVER['REQUEST_METHOD'] == "POST") :
+  $sql = sprintf("INSERT INTO `personnes`SET `nom`='%s', `prenom`='%s'",
+  $_POST['nom'], $_POST['prenom']);
+  $connect->query($sql);
+  echo $connect->error;
+  $allPeople['new_id'] = $connect->insert_id; // quand on insert une entrée, on ne connait pas l'ID pusque c'est la DB qui va le créer, donc on met l'insert_id ici
+  $allPeople['response'] = "Ajout d'une personne avec l'id " . $connect->insert_id; // et du coup on le récup ici
+  
+endif;
+
 echo json_encode($allPeople);
 
 ?>
