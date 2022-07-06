@@ -26,6 +26,7 @@ if($result->num_rows > 0 ) :
   session_start(); 
   $_SESSION['user'] = $user['id_users']; 
   $_SESSION['token'] = md5($user['login'].time()); 
+  $_SESSION['expiration'] = time() + 1 * 3600; // le token sera valable une heure
   $response['response'] = "ok connecté";
   $response['token'] = $_SESSION['token'];
 else : 
