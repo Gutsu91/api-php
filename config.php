@@ -5,7 +5,7 @@
   define('DB_HOST', 'localhost'); // on défini l'url de la db
   define('DB_NAME', 'ingrwf10_php'); // on défini le nom de la db
 
-  define('MODE', 'dev'); // on indique qu'on est en mode dev
+  define('MODE', 'dev'); // on crée une constante pour indiquer qu'on est en mode dev
   require_once 'function.php'; // on requiert le fichier function.php, une seule fois. On aura besoin du 'mode dev' dans function, donc on appelle fonction après l'avoir set sur dev
 
 
