@@ -1,0 +1,19 @@
+STEP 1: Get uniquement
+faire une table produit : id nom id_categorie prix
+faire une table categorie: id categorie, nom
+
+faire une route produit
+-> afficher tous les produits
+faire une route produit/id
+-> afficher le produit ainsi que l'id de la categorie et le nom de la categorie
+
+faire une route catégorie
+-> afficher toutes les catégories
+faire une route categorie/id
+-> afficher la catégorie et tous ses produits
+
+STEP 2: Delete 
+(mais AVANT de travailler on doit définir ce qu'on fera des produits qu'on supprime)
+ensuite, possibilité d'ajouter categorie/produit
+possibilité de supprimer des produits/categorie
+-> que faire des produits quand on del une categorie ?
