@@ -11,3 +11,5 @@ RewriteRule news$ all-news.php [L]
 RewriteRule personne/([0-9]+)$ personne.php?id_personnes=$1 [L]
 RewriteRule personne/$ personne.php [L]
 RewriteRule personne$ personne.php [L]
+RewriteRUle deconnect$ auth_api.php?delog [L] # route pour se delog dans l'API
+RewriteRule auth$ auth_api.php [L] # route pour se logger dans l'API
