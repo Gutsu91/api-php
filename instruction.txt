@@ -14,6 +14,6 @@ faire une route categorie/id
 
 STEP 2: Delete 
 (mais AVANT de travailler on doit définir ce qu'on fera des produits qu'on supprime)
-ensuite, possibilité d'ajouter categorie/produit
+ensuite, possibilité d'ajouter categorie/produit -> on dit qu'on refuse s'il y a encore des produits dans la catégorie
 possibilité de supprimer des produits/categorie
 -> que faire des produits quand on del une categorie ?
