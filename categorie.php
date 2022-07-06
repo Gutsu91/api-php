@@ -24,25 +24,32 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
 endif;
 
 /* Gestion du DELETE */
-if($_SERVER['REQUEST_METHOD'] == "DELETE") :
-  if(isset($_GET['id_categorie'])) : // on fait une requête sur la table produit pour voir s'il a des produits qui ont cette catégorie
-    $req_cat_empty = sprintf("SELECT * FROM product WHERE id_categorie_prod=%d",
-    $_GET['id_categorie']);
-    $categorie = $connect->query($req_cat_empty);
+
+if($_SERVER['REQUEST_METHOD'] == "DELETE"):
+  if(isset($_GET['id_categorie'])) :
+    $categorie['response'] = "vous avez bien spécifié l'id de la catégorie";
+    $categorie['code'] = "OK";
+    $req_cat_empty = sprintf("SELECT * FROM product WHERE id_categorie_prod = %d",
+      $_GET['id_categorie']);
+    $result = $connect->query($req_cat_empty);
     echo $connect->error;
-    $nbResult = $categorie->num_rows;
-    if($nbResult == 0 ) :
-      echo 'foo';
-    else:
-      $categorie['response'] = "Vous ne pouvez pas supprimer cette catégorie car elle contient encore des produits";
-      $categoriet['code'] = "NOK";
-    endif;
+    $categorie['nbhits'] = $result->num_rows;
+      if ($categorie['nbhits']  > 0 ):
+        $categorie['response'] = "Vous devez vider les produits de la catégorie avant de la supprimer";
+        $categorie['code'] = "NOK";
+      else:
+        $categorie['response'] = "Suppression de la catégorie avec l'id " . $_GET['id_categorie'];
+        $categorie['code'] = "OK";
+        $req_cat = sprintf("DELETE FROM categorie WHERE id_categorie = %d",
+          $_GET['id_categorie']);
+        $connect->query($req_cat);
+        echo $connect->error;
+      endif;
   else:
-    $categorie['response'] = "Vous n'avez pas défini l'id de la catégorie à supprimer";
+    $categorie['response'] = "vous devez préciser l'id de la catégorie à supprimer";
     $categorie['code'] = "NOK";
   endif;
 endif;
-/* post mortem : le delete ne fonctionne pas, j'ai du foirer dans mes checks */
 
 echo json_encode($categorie); // doit être la dernière ligne sinon il ne retournera pas de réponse
 ?>
