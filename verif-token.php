@@ -21,6 +21,7 @@ if($_SERVER['REQUEST_METHOD'] != 'GET') : // si la methode est différente de ge
       die;
     endif;
   endif;
+  $_SESSION['expiration'] = time() +1 *60; // on renouvelle l'expiration pour une minute si aucune expiration n'a été faite après les if
 endif;
 
 ?>
