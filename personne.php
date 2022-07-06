@@ -1,29 +1,7 @@
 <?php
 require_once 'config.php'; // on a besoin de config pour pouvoir se connecter à la db ET charger fonction
 require_once 'headers.php'; // on a besoin d'inclure les headers pour faire de l'API (on aurait pu l'inclure dans config)
-session_start();
-
-if($_SERVER['REQUEST_METHOD'] != 'GET') : // si la methode est différente de get
-  $now = time(); // la variable now = maintenant
-  if ($now > $_SESSION['expiration'] OR !$_SESSION['user']): // si maintenant est plus tard que l'expiration OU que l'user n'est pas setté, exécuter le code suivant
-    unset($_SESSION['user']); //supprimer user du tableau $_SESSION
-    unset($_SESSION['token']); // supprimer le token 
-    unset($_SESSION['expiration']); // suprimer l'expiration
-    $response['response'] = "session timed out a/or access denied"; // message d'erreur
-    $response['code'] = 403;
-    echo json_encode($response); //encoder la réponse en json
-    die(); //arrêter l'exécution du reste du code (même chose qu'un exit)
-  else:
-    $json = file_get_contents('php://input'); // on récupère le json dans l'en-tête http
-    $arrayPOST = json_decode($json, true);
-    if($arrayPOST['token'] != $_SESSION['token']) :
-      $response['response'] = "wrong token"; // message d'erreur
-      $response['code'] = 401;
-      echo json_encode($response); //encoder la réponse en json
-      die;
-    endif;
-  endif;
-endif;
+require_once 'verif-token.php';
 
 /* Gestion des requêtes faites en GET sur la route personne */
 if($_SERVER['REQUEST_METHOD'] == 'GET') : // Si la ligne de l'array de la supervariable $_SERVER est en GET (si la requête et en get quoi), alors :

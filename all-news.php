@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'headers.php';
+require_once 'verif-token.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
   $req_all_news = "SELECT * FROM `news`";

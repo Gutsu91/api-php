@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'headers.php';
+require_once 'verif-token.php';
 
 
 //$theNews = $result->fetch_all(MYSQLI_ASSOC);

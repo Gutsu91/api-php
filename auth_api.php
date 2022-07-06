@@ -6,12 +6,13 @@ if (isset($_GET['delog'])) :
   session_start(); // on accede à session
   unset($_SESSION['user']); // on retire l'user de session
   unset($_SESSION['token']); //on retire le token de la session
+  unset($_SESSION['expiration']);
   $response['message'] = "deconnection";
   $response['code'] = 200;
   $response['time'] = date('Y-m-d, H:i:s');
+  echo json_encode($response);
   exit;
 endif;
-
 
 $json = file_get_contents('php://input'); // on récup les données dans ce qu'on enverra en JSON, plus dans $_POST; on travaille l'api pas le navugateur
 $arrayPOST = json_decode($json, true);
