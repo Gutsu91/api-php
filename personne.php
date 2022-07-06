@@ -78,6 +78,5 @@ if($_SERVER['REQUEST_METHOD'] == "PUT") :
   endif;
 endif;
 
-echo json_encode($allPeople);
-
+echo json_encode($allPeople); // doit être la dernière ligne sinon il ne te retournera pas de réponse
 ?>

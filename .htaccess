@@ -13,3 +13,11 @@ RewriteRule personne/$ personne.php [L]
 RewriteRule personne$ personne.php [L]
 RewriteRUle deconnect$ auth_api.php?delog [L] # route pour se delog dans l'API
 RewriteRule auth$ auth_api.php [L] # route pour se logger dans l'API
+
+# routes exercice
+RewriteRule products/([0-9]+)$ product.php?id_produit=$1 [L]
+RewriteRule products/$ product.php [L]
+RewriteRule products$ product.php [L]
+RewriteRule categorie/([0-9]+)$ categorie.php?id_categorie=$1 [L]
+RewriteRule categorie/$ categorie.php [L]
+RewriteRule categorie$ categorie.php [L]
