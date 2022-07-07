@@ -15,6 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') : // Si la ligne de l'array de la superv
   endif;
 
   $result = $connect->query($req_allPeople);  // on stoque les résultats de la query danbs l'objet connect
+  // on peut voir $result comme un pont entre PHP et MySQL
   echo $connect->error; // on écrit l'erreur de l'objet connect s'il y en a une
 
   $allPeople['code'] = 200; // on écrit un code de réponse arbirtraire dans le json

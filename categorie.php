@@ -21,6 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
   while($row = $result->fetch_assoc()):
     $categorie['data'][] = $row;
   endwhile;
+// il faudrait mettre les produits dans un tableau produit (pierre a fait une requête dans une requête). c'est plus souple et ça sera plus facile de boucler ça
 endif;
 
 /* Gestion du DELETE */
