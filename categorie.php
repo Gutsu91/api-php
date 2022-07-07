@@ -51,5 +51,24 @@ if($_SERVER['REQUEST_METHOD'] == "DELETE"):
   endif;
 endif;
 
+/* Gestion du POST */
+if($_SERVER['REQUEST_METHOD'] == "POST") :
+  $json = file_get_contents('php://input');
+  $object = json_decode($json, true);
+  if(!isset($object['nom'])) :
+    $categorie['response'] = "Vous devez spécifier le nom de la catégorie à créer";
+    $categorie['code'] = "NOK";
+  else:
+    $req_cat = sprintf("INSERT INTO categorie SET `nom_categorie`='%s'",
+    strip_tags(addslashes($object['nom']))
+  );
+  $connect->query($req_cat);
+  echo $connect->error;
+  $categorie['new_id'] = $connect->insert_id;
+  $categorie['code'] = "OK";
+  $categorie['response'] = "Ajout d'une catégorie " .$object['nom'] . " avec l'id " . $connect->insert_id;
+  endif;
+endif;
+
 echo json_encode($categorie); // doit être la dernière ligne sinon il ne retournera pas de réponse
 ?>
