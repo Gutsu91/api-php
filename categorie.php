@@ -70,6 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") :
   $categorie['response'] = "Ajout d'une catégorie " .$object['nom'] . " avec l'id " . $connect->insert_id;
   endif;
 endif;
+// il faudrait ajouter un if pour voir si l'id n'est pas null, OR l'id ne peut pas être null: De 1 en sql on doit mettre ISNULL et surtout de 2 une clef primaire ne peut pas être nulle. Du coup, il faudrait l'assigner par défaut à 0 s'il n'est pas présent, puis convertir plus bas le 0 d'SQL en null dans le json (il passera toujours 0 dans la table, mais il n'y aura plus besoin de renseigner la valeur dans le json)
 
 echo json_encode($categorie); // doit être la dernière ligne sinon il ne retournera pas de réponse
 ?>
